@@ -1,9 +1,9 @@
 local CG,P,L,W,TS,UIS,RS,VU,PPS,HS=game:GetService("CoreGui"),game:GetService("Players"),game:GetService("Lighting"),game:GetService("Workspace"),game:GetService("TweenService"),game:GetService("UserInputService"),game:GetService("RunService"),game:GetService("VirtualUser"),game:GetService("ProximityPromptService"),game:GetService("HttpService")
 local LP=P.LocalPlayer local TP=(gethui and gethui())or CG if TP:FindFirstChild("VortexGraphicsHub")then TP.VortexGraphicsHub:Destroy()end
-local SFName="VortexHub_Config.json" local HC={Shaders=false,FpsBoost=false,WallBlur=true,Fog=false,MotionBlur=false,Fullbright=false,PlayerLight=false,AutoTime=false,RandomRain=false,ESPPlayer=false,ESPNPC=false,DangerESP=false,ESPItems=false,TeleportTool=false,InstantInteract=false,PlayerMods=false,NoCooldown=false,InfJump=false,Noclip=false,WalkSpeed=16,JumpPower=50,FOV=70,AntiFling=false,AntiVoid=false,AntiAfk=false,AutoRejoin=false,Notifications=true,SelectedTheme="Orion",Whitelist=true}
+local SFName="VortexHub_Config.json" local HC={Shaders=false,FpsBoost=false,WallBlur=true,Fog=false,MotionBlur=false,Fullbright=false,PlayerLight=false,AutoTime=false,RandomRain=false,ESPPlayer=false,ESPNPC=false,DangerESP=false,ESPItems=false,TeleportTool=false,InstantInteract=false,PlayerMods=false,NoCooldown=false,InfJump=false,Noclip=false,WalkSpeed=16,JumpPower=50,FOV=70,AntiFling=false,AntiVoid=false,AntiAfk=false,AutoRejoin=false,Notifications=true,SelectedTheme="Orion",Whitelist=true,InfiniteZoom=false}
 local IC={} local function saveC()pcall(function()if writefile then writefile(SFName,HS:JSONEncode(HC))end end)end
 local function loadC()if readfile and isfile and isfile(SFName)then local s,d=pcall(function()return HS:JSONDecode(readfile(SFName))end)if s and type(d)=="table"then for k,v in pairs(d)do if HC[k]~=nil then HC[k]=v end end end end end loadC()
-local shOn,fpsOn,wbOn,fgOn,mbOn,fbOn,plOn,atOn,rrOn,epOn,enOn,dEspOn,espiOn,ttOn,iiOn,pmOn,ncOn,ijOn,nclOn,pSpd,pJmp,pFov,afOn,avOn,aaOn,arOn,jelOn,wlOn=HC.Shaders,HC.FpsBoost,HC.WallBlur,HC.Fog,HC.MotionBlur,HC.Fullbright,HC.PlayerLight,HC.AutoTime,HC.RandomRain,HC.ESPPlayer,HC.ESPNPC,HC.DangerESP,HC.ESPItems,HC.TeleportTool,HC.InstantInteract,HC.PlayerMods,HC.NoCooldown,HC.InfJump,HC.Noclip,HC.WalkSpeed,HC.JumpPower,HC.FOV,HC.AntiFling,HC.AntiVoid,HC.AntiAfk,HC.AutoRejoin,HC.Notifications,HC.Whitelist
+local shOn,fpsOn,wbOn,fgOn,mbOn,fbOn,plOn,atOn,rrOn,epOn,enOn,dEspOn,espiOn,ttOn,iiOn,pmOn,ncOn,ijOn,nclOn,pSpd,pJmp,pFov,afOn,avOn,aaOn,arOn,jelOn,wlOn,izOn=HC.Shaders,HC.FpsBoost,HC.WallBlur,HC.Fog,HC.MotionBlur,HC.Fullbright,HC.PlayerLight,HC.AutoTime,HC.RandomRain,HC.ESPPlayer,HC.ESPNPC,HC.DangerESP,HC.ESPItems,HC.TeleportTool,HC.InstantInteract,HC.PlayerMods,HC.NoCooldown,HC.InfJump,HC.Noclip,HC.WalkSpeed,HC.JumpPower,HC.FOV,HC.AntiFling,HC.AntiVoid,HC.AntiAfk,HC.AutoRejoin,HC.Notifications,HC.Whitelist,HC.InfiniteZoom
 local ijc,nlc,avc,pmc,aac,arc,atc,sLp,iic,fbLp,plc,mbc,afc,ncc local lSCf=nil local lCR=CFrame.new()local ECol={PName="#00FFFF",PHP="#32FF32",PDist="#FFAA00",NName="#FF4444",NHP="#32FF32",NDist="#FFAA00",ItemName="#00FFCC",ItemDist="#FFAA00"}
 local tNPC,tPly,tDNPC,tItems={},{},{},{} local eUp,dUp,itemUp
 local OL={GS=L.GlobalShadows,B=L.Brightness,EDS=L.EnvironmentDiffuseScale,ESS=L.EnvironmentSpecularScale,FS=L.FogStart,FE=L.FogEnd,FC=L.FogColor,CT=L.ClockTime,A=L.Ambient,OA=L.OutdoorAmbient,T=L.Technology,SS=L.ShadowSoftness}
@@ -64,7 +64,7 @@ local TC=Instance.new("Frame",MF)TC.Size,TC.Position,TC.BackgroundTransparency=U
 local function cTB(n,px,w)local B=Instance.new("TextButton",TC)B.Size,B.Position,B.BackgroundColor3,B.Text,B.TextColor3,B.Font,B.TextSize=UDim2.new(w or 0.142,0,1,0),UDim2.new(px,0,0,0),Color3.fromRGB(30,30,30),n,Color3.fromRGB(150,150,150),Enum.Font.GothamBold,10 return B end
 local tMB,tEB,tPB,tPrB,tHB,tThB,tVB=cTB("🔧 Princ.",0,0.142),cTB("👁️ ESPS",0.142,0.142),cTB("👤 Player",0.284,0.142),cTB("🛡️ Prot.",0.426,0.142),cTB("📜 Hist.",0.568,0.142),cTB("🎨 Temas",0.710,0.142),cTB("👀 Viewer",0.852,0.148)tMB.BackgroundColor3=Color3.fromRGB(45,45,45)tMB.TextColor3=Color3.fromRGB(255,255,255)
 local function cScr(n,cY)local S=Instance.new("ScrollingFrame",MF)S.Size,S.Position,S.BackgroundTransparency,S.ScrollBarThickness,S.CanvasSize,S.Visible=UDim2.new(1,-20,1,-80),UDim2.new(0,10,0,75),1,4,UDim2.new(0,0,0,cY),false local L=Instance.new("UIListLayout",S)L.Padding,L.HorizontalAlignment,L.SortOrder=UDim.new(0,10),Enum.HorizontalAlignment.Center,Enum.SortOrder.LayoutOrder return S end
-local sM,sE,sP,sPr,sH,sTh,sV=cScr("SM",950),cScr("SE",850),cScr("SP",720),cScr("SPr",460),cScr("SH",1200),cScr("STh",650),cScr("SV",850)sM.Visible=true
+local sM,sE,sP,sPr,sH,sTh,sV=cScr("SM",950),cScr("SE",850),cScr("SP",760),cScr("SPr",460),cScr("SH",1200),cScr("STh",650),cScr("SV",850)sM.Visible=true
 local function sTab(aB,aS)local t={{tMB,sM},{tEB,sE},{tPB,sP},{tPrB,sPr},{tHB,sH},{tThB,sTh},{tVB,sV}}for _,d in pairs(t)do local b,s=d[1],d[2]if b==aB then b.BackgroundColor3=Color3.fromRGB(45,45,45)b.TextColor3=Color3.fromRGB(255,255,255)s.Visible=true else b.BackgroundColor3=Color3.fromRGB(30,30,30)b.TextColor3=Color3.fromRGB(150,150,150)s.Visible=false end end end
 tMB.MouseButton1Click:Connect(function()sTab(tMB,sM)end)tEB.MouseButton1Click:Connect(function()sTab(tEB,sE)end)tPB.MouseButton1Click:Connect(function()sTab(tPB,sP)end)tPrB.MouseButton1Click:Connect(function()sTab(tPrB,sPr)end)tHB.MouseButton1Click:Connect(function()sTab(tHB,sH)end)tThB.MouseButton1Click:Connect(function()sTab(tThB,sTh)end)tVB.MouseButton1Click:Connect(function()sTab(tVB,sV)end)
 local function cST(n,p)local T=Instance.new("TextLabel",p)T.Size,T.BackgroundTransparency,T.Text,T.TextColor3,T.Font,T.TextSize,T.TextXAlignment=UDim2.new(1,0,0,25),1,n,CTh.A,Enum.Font.GothamBlack,13,Enum.TextXAlignment.Left table.insert(TE.Txs,T)end
@@ -108,8 +108,10 @@ cTog("📦 ESP de Itens",sE,espiOn,function(s)espiOn=s if not s then for _,d in 
 cST("🎨 CORES",sE)local function cECBtn(n,c3,hc)local b=Instance.new("TextButton",sE)b.Size,b.BackgroundColor3,b.Text,b.TextColor3,b.Font,b.TextSize=UDim2.new(1,0,0,32),Color3.fromRGB(45,45,45),"🎨 "..n,c3,Enum.Font.GothamBold,12 Instance.new("UICorner",b).CornerRadius=UDim.new(0,6)b.MouseButton1Click:Connect(function()ECol.PName,ECol.NName=hc,hc end)end
 cECBtn("Branco",Color3.fromRGB(255,255,255),"#FFFFFF")cECBtn("Amarelo",Color3.fromRGB(255,215,0),"#FFD700")cECBtn("Roxo",Color3.fromRGB(176,38,255),"#B026FF")cECBtn("Verde",Color3.fromRGB(50,205,50),"#32CD32")cECBtn("Rosa",Color3.fromRGB(255,20,147),"#FF1493")
 
-cST("👤 MODS",sP)cTog("🌀 TeleportTool",sP,ttOn,function(s)ttOn=s if s then gTT()else rTT()end end,"TeleportTool")
+cST("👤 MODS",sP)
+cTog("🌀 TeleportTool",sP,ttOn,function(s)ttOn=s if s then gTT()else rTT()end end,"TeleportTool")
 cTog("⚡ Instant Interact",sP,iiOn,function(s)iiOn=s if s then for _,p in pairs(W:GetDescendants())do if p:IsA("ProximityPrompt")then p.HoldDuration=0 end end iic=PPS.PromptShown:Connect(function(p)p.HoldDuration=0 end)else if iic then iic:Disconnect()iic=nil end end end,"InstantInteract")
+cTog("🔭 Infinite Zoom",sP,izOn,function(s)izOn=s if s then LP.CameraMaxZoomDistance=math.huge else LP.CameraMaxZoomDistance=400 end end,"InfiniteZoom")
 
 -- [SISTEMA DE WALK SPEED & JUMP POWER CORRIGIDO EM LOOP CONTINUO DE ALTA FREQUÊNCIA] --
 cTog("⚡ Mods Player",sP,pmOn,function(s)
@@ -139,42 +141,40 @@ cTog("🚀 Inf Jump",sP,ijOn,function(s)ijOn=s if s then ijc=UIS.JumpRequest:Con
 cTog("👻 Noclip",sP,nclOn,function(s)nclOn=s if s then nlc=RS.Stepped:Connect(function()local c=LP.Character if c then local h=c:FindFirstChildOfClass("Humanoid")if h then h:ChangeState(11)end end end)else if nlc then nlc:Disconnect()nlc=nil end end end,"Noclip")
 cSli("🏃 WalkSpeed","16 a 50",16,200,pSpd,sP,function(v)pSpd=v if pmOn then local c=LP.Character if c and c:FindFirstChildOfClass("Humanoid")then c.Humanoid.WalkSpeed=v end end end,"WalkSpeed")cSli("🦘 JumpPower","50 a 100",50,300,pJmp,sP,function(v)pJmp=v if pmOn then local c=LP.Character if c and c:FindFirstChildOfClass("Humanoid")then c.Humanoid.JumpPower=v end end end,"JumpPower")cSli("🔭 FOV","70 a 90",70,120,pFov,sP,function(v)pFov=v end,"FOV")
 
-cST("🛡️️ PROTEÇÃO",sPr)cTog("🛡️ Anti-Fling",sPr,afOn,function(s)afOn=s if s then eAF()else if afc then afc:Disconnect()afc=nil end end end,"AntiFling")
-cTog("🌌 Anti-Void",sPr,avOn,function(s)avOn=s if s then local rp=RaycastParams.new()rp.FilterType=Enum.RaycastFilterType.Exclude avc=RS.Heartbeat:Connect(function()if not avOn then return end local c=LP.Character if not c then return end local h,hu=c:FindFirstChild("HumanoidRootPart"),c:FindFirstChildOfClass("Humanoid")if not h or not hu or hu.Health<=0 then return end rp.FilterDescendantsInstances={c}if hu.FloorMaterial~=Enum.Material.Air then lSCf=h.CFrame end local hD,hU=W:Raycast(h.Position,Vector3.new(0,-2500,0),rp),W:Raycast(h.Position,Vector3.new(0,2500,0),rp)if not hD and not hU and h.Position.Y<-50 then h.AssemblyLinearVelocity,h.AssemblyAngularVelocity=Vector3.new(0,0,0),Vector3.new(0,0,0)pcall(function()h.Velocity,h.RotVelocity=Vector3.new(0,0,0),Vector3.new(0,0,0)end)local sCF if lSCf and lSCf.Position.Y>-20 then sCF=lSCf+Vector3.new(0,3,0)end if not sCF then local sl=W:FindFirstChildWhichIsA("SpawnLocation",true)if sl then sCF=sl.CFrame+Vector3.new(0,5,0)end end if not sCF then local cr=W:Raycast(Vector3.new(0,500,0),Vector3.new(0,-1000,0),rp)if cr and cr.Position then sCF=CFrame.new(cr.Position+Vector3.new(0,5,0))end end if not sCF then sCF=CFrame.new(0,50,0)end h.CFrame=sCF sNotif("🛡️","Salvo do Void!","Success")end end)else if avc then avc:Disconnect()avc=nil end end end,"AntiVoid")
-cTog("🚫 Anti-AFK",sPr,aaOn,function(s)aaOn=s if s then aac=LP.Idled:Connect(function()VU:CaptureController()VU:ClickButton2(Vector2.new())end)else if aac then aac:Disconnect()aac=nil end end end,"AntiAfk")
-cTog("🔄 Auto-Rejoin (Anti-Disconnect)",sPr,arOn,function(s)arOn=s if s then arc=game:GetService("GuiService").ErrorMessageChanged:Connect(function()task.wait(1.5)local TS=game:GetService("TeleportService")pcall(function()TS:TeleportToPlaceInstance(game.PlaceId,game.JobId,LP)end)end)else if arc then arc:Disconnect()arc=nil end end end,"AutoRejoin")
+cST("🛡️ PROTEÇÃO",sPr)cTog("🛡️ Anti-Fling",sPr,afOn,function(s)afOn=s if s then eAF()else if afc then afc:Disconnect()afc=nil end end end,"AntiFling")
+cTog("🌌 Anti-Void",sPr,avOn,function(s)avOn=s if s then local rp=RaycastParams.new()rp.FilterType=Enum.RaycastFilterType.Exclude avc=RS.Heartbeat:Connect(function()if not avOn then return end local c=LP.Character if not c then return end local h,hu=c:FindFirstChild("HumanoidRootPart"),c:FindFirstChildOfClass("Humanoid")if not h or not hu or hu.Health<=0 then return end rp.FilterDescendantsInstances={c}if hu.FloorMaterial~=Enum.Material.Air then lSCf=h.CFrame end local hD,hU=W:Raycast(h.Position,Vector3.new(0,-2500,0),rp),W:Raycast(h.Position,Vector3.new(0,2500,0),rp)if not hD and not hU and h.Position.Y<-50 then h.AssemblyLinearVelocity,h.AssemblyAngularVelocity=Vector3.new(0,0,0),Vector3.new(0,0,0)pcall(function()h.Velocity,h.RotVelocity=Vector3.new(0,0,0),Vector3.new(0,0,0)end)local sCF if lSCf and lSCf.Position.Y>-20 then sCF=lSCf+Vector3.new(0,3,0) else sCF=CFrame.new(0,50,0) end h.CFrame=sCF end end) else if avc then avc:Disconnect()avc=nil end end end,"AntiVoid")
 
-cST("📜 HISTÓRICO",sH)cTog("🔔 Notificações",sH,jelOn,function(s)jelOn=s end,"Notifications")
-local function cTBtn(n,mc,tc,ac,tk)local b=Instance.new("TextButton",sTh)b.Size,b.BackgroundColor3,b.Text,b.TextColor3,b.Font,b.TextSize=UDim2.new(1,0,0,40),Color3.fromRGB(45,45,45),"🎨 "..n,ac,Enum.Font.GothamBold,14 Instance.new("UICorner",b).CornerRadius=UDim.new(0,6)b.MouseButton1Click:Connect(function()appT(mc,tc,ac,tk)end)end
-cTBtn("Orion",Color3.fromRGB(36,36,37),Color3.fromRGB(30,30,30),Color3.fromRGB(52,152,219),"Orion")
-cTBtn("Vampiro",Color3.fromRGB(20,10,10),Color3.fromRGB(15,5,5),Color3.fromRGB(220,50,50),"Vampiro")
-cTBtn("Tóxico",Color3.fromRGB(15,25,15),Color3.fromRGB(10,15,10),Color3.fromRGB(50,220,100),"Tóxico")
-cTBtn("Ametista",Color3.fromRGB(30,20,40),Color3.fromRGB(20,10,30),Color3.fromRGB(155,89,182),"Ametista")
-cTBtn("Ouro",Color3.fromRGB(40,35,20),Color3.fromRGB(30,25,10),Color3.fromRGB(241,196,15),"Ouro")
-cTBtn("Sakura",Color3.fromRGB(40,25,30),Color3.fromRGB(30,15,20),Color3.fromRGB(255,153,204),"Sakura")
-cTBtn("Neon",Color3.fromRGB(15,30,35),Color3.fromRGB(10,20,25),Color3.fromRGB(0,255,255),"Neon")
-cTBtn("Magma",Color3.fromRGB(40,20,10),Color3.fromRGB(30,10,5),Color3.fromRGB(230,126,34),"Magma")
-cTBtn("Cyberpunk",Color3.fromRGB(20,20,25),Color3.fromRGB(15,15,20),Color3.fromRGB(255,255,0),"Cyberpunk")
-cTBtn("Oceano",Color3.fromRGB(10,25,40),Color3.fromRGB(5,15,30),Color3.fromRGB(0,190,255),"Oceano")
-cTBtn("Inferno",Color3.fromRGB(25,5,5),Color3.fromRGB(15,0,0),Color3.fromRGB(255,80,0),"Inferno")
-cTBtn("Fantasma",Color3.fromRGB(45,45,50),Color3.fromRGB(35,35,40),Color3.fromRGB(220,220,230),"Fantasma")
-cTBtn("Floresta",Color3.fromRGB(15,30,15),Color3.fromRGB(10,20,10),Color3.fromRGB(100,255,100),"Floresta")
+cTog("💤 Anti-AFK",sPr,aaOn,function(s)aaOn=s if s then aac=LP.Idled:Connect(function()VU:CaptureController()VU:ClickButton2(Vector2.new())end)else if aac then aac:Disconnect()aac=nil end end end,"AntiAfk")
+cTog("♻️ Auto Rejoin",sPr,arOn,function(s)arOn=s if s then arc=CG.DescendantAdded:Connect(function(d)if d.Name=="ErrorPrompt"then TS:Create(d,TweenInfo.new(0),{Visible=false}):Play()task.wait(2)TS:Create(d,TweenInfo.new(0),{Visible=false}):Play()game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,game.JobId,LP)end end)else if arc then arc:Disconnect()arc=nil end end end,"AutoRejoin")
 
+cST("🔔 SISTEMA",sPr)
+cTog("📱 Notificações",sPr,jelOn,function(s)jelOn=s end,"Notifications")
+cTog("🤝 Whitelist Amigos",sPr,wlOn,function(s)wlOn=s end,"Whitelist")
+
+cST("🎨 ESCOLHA SEU TEMA", sTh)
+local Thms={
+    ["Orion"]={Color3.fromRGB(36,36,37),Color3.fromRGB(30,30,30),Color3.fromRGB(52,152,219)},
+    ["Ruby"]={Color3.fromRGB(30,20,20),Color3.fromRGB(24,14,14),Color3.fromRGB(231,76,60)},
+    ["Emerald"]={Color3.fromRGB(20,30,20),Color3.fromRGB(14,24,14),Color3.fromRGB(46,204,113)},
+    ["Amethyst"]={Color3.fromRGB(30,20,40),Color3.fromRGB(24,14,30),Color3.fromRGB(155,89,182)},
+    ["Gold"]={Color3.fromRGB(35,35,30),Color3.fromRGB(25,25,20),Color3.fromRGB(241,196,15)}
+}
+for tN,tC in pairs(Thms)do
+    local btn=Instance.new("TextButton",sTh)btn.Size,btn.BackgroundColor3,btn.Text,btn.TextColor3,btn.Font,btn.TextSize=UDim2.new(1,0,0,32),Color3.fromRGB(45,45,45),"🎨 "..tN,tC[3],Enum.Font.GothamBold,12
+    Instance.new("UICorner",btn).CornerRadius=UDim.new(0,6)
+    btn.MouseButton1Click:Connect(function()appT(tC[1],tC[2],tC[3],tN)end)
+end
+
+-- [SISTEMA DE CARREGAMENTO DO AUTO-SAVE CORRIGIDO] --
 task.spawn(function()
-    if not LP.Character then LP.CharacterAdded:Wait()end 
-    task.wait(0.5)
-    local sT=HC.SelectedTheme 
-    if sT=="Vampiro"then appT(Color3.fromRGB(20,10,10),Color3.fromRGB(15,5,5),Color3.fromRGB(220,50,50))
-    elseif sT=="Tóxico"then appT(Color3.fromRGB(15,25,15),Color3.fromRGB(10,15,10),Color3.fromRGB(50,220,100))
-    elseif sT=="Ametista"then appT(Color3.fromRGB(30,20,40),Color3.fromRGB(20,10,30),Color3.fromRGB(155,89,182))
-    elseif sT=="Ouro"then appT(Color3.fromRGB(40,35,20),Color3.fromRGB(30,25,10),Color3.fromRGB(241,196,15))
-    elseif sT=="Sakura"then appT(Color3.fromRGB(40,25,30),Color3.fromRGB(30,15,20),Color3.fromRGB(255,153,204))
-    elseif sT=="Neon"then appT(Color3.fromRGB(15,30,35),Color3.fromRGB(10,20,25),Color3.fromRGB(0,255,255))
-    elseif sT=="Magma"then appT(Color3.fromRGB(40,20,10),Color3.fromRGB(30,10,5),Color3.fromRGB(230,126,34))
-    elseif sT=="Cyberpunk"then appT(Color3.fromRGB(20,20,25),Color3.fromRGB(15,15,20),Color3.fromRGB(255,255,0))
-    elseif sT=="Oceano"then appT(Color3.fromRGB(10,25,40),Color3.fromRGB(5,15,30),Color3.fromRGB(0,190,255))
-    elseif sT=="Inferno"then appT(Color3.fromRGB(25,5,5),Color3.fromRGB(15,0,0),Color3.fromRGB(255,80,0))
-    elseif sT=="Fantasma"then appT(Color3.fromRGB(45,45,50),Color3.fromRGB(35,35,40),Color3.fromRGB(220,220,230))
-    elseif sT=="Floresta"then appT(Color3.fromRGB(15,30,15),Color3.fromRGB(10,20,10),Color3.fromRGB(100,255,100))
-    end 
+    task.wait(0.2)
+    -- 1. Carrega e aplica o Último Tema Salvo
+    if HC.SelectedTheme and Thms[HC.SelectedTheme] then
+        local t = Thms[HC.SelectedTheme]
+        appT(t[1],t[2],t[3],HC.SelectedTheme)
+    end
+    -- 2. Restaura e executa os valores físicos (Toggles e Sliders)
+    for k, func in pairs(IC) do
+        pcall(func)
+    end
 end)
